@@ -1,0 +1,52 @@
+﻿
+@model OnlineShop.PayPal.PDTHolder
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Success</title>
+</head>
+<body>
+    <div class="container">
+		<div class="contact-form">
+
+			<div>THÔNG TIN ĐẶT HÀNG</div>
+			<div>
+				<label class="contact"><strong>TransactionId:</strong></label>
+				@ViewBag.result.TransactionId
+			</div>
+
+			<div>
+				<label class="contact"><strong>First Name:</strong></label>
+				@ViewBag.result.PayerFirstName
+			</div>
+
+			<div>
+				<label class="contact"><strong>Last Name:</strong></label>
+				@ViewBag.result.PayerLastName
+			</div>
+
+			<div>
+				<label class="contact"><strong>Email:</strong></label>
+				@ViewBag.result.PayerEmail
+			</div>
+			<div>
+				<label class="contact"><strong>Payment Gross:</strong></label>
+				@ViewBag.result.GrossTotal
+			</div>
+
+			<div>
+				<label class="contact"><strong>Payment Fee:</strong></label>
+				@ViewBag.result.PaymentFee
+			</div>
+
+
+		</div>
+    </div>
+</body>
+</html>
