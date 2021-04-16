@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Models.EF.OrderDetail>
+@using PagedList.Mvc;
+@{
+	ViewBag.Title = "Chi tiết đơn hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+	<span class="label label-info">CHI TIẾT ĐƠN HÀNG</span>
+}
+
+@section jsFooter{
+
+	<script src="/assets/admin/js/controller/productController.js"></script>
+	<script src="/assets/admin/js/controller/userController.js"></script>
+
+}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				@*@using (Html.BeginForm("Select", "OrderDetail", FormMethod.Get))
+				{
+					<div class="row form-group">
+						<div class="col-lg-12">
+							<div class="col-md-4">
+								<input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+							</div>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-success">Tìm kiếm</button>
+								<a class="btn btn-primary" href="/Admin/Menu/Create">Thêm mới</a>
+							</div>
+						</div>
+					</div>
+				}*@
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>ID Order</th>
+							<th>ID Sản Phẩm</th>
+							<th>Số lượng</th>
+							<th>Giá</th>
+							<th>Thành tiền</th>
+							<th>Tuỳ Chọn</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+						<tr id="row_@item.OrderID">
+							<td>@item.OrderID</td>
+							<td>@item.ProductID </td>
+							<td>@item.Quantity</td>
+							<td>@item.Price.GetValueOrDefault(0).ToString("#,##") VNĐ</td>
+							<td>@((item.Price.GetValueOrDefault(0) * item.Quantity).Value.ToString("#,##")) VNĐ</td>
+
+							<td>
+								<a href="/Admin/Product/Select"><button type="button" class="btn btn-danger">Xem sản phẩm</button></a>
+
+							</td>
+						</tr>
+						}
+
+					</tbody>
+				</table>
+				@Html.PagedListPager(Model, page => Url.Action("Select", new { page, @searchString = @ViewBag.SearchString }))
+				@Html.ActionLink("Quay lại", "Select", "Order")
+			</div>
+				<!-- /.table-responsive -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+	</div>
+</div>
+<!-- Modal -->
